@@ -14,12 +14,32 @@ const zone = document.querySelector('.zone');
 const scoreDisplay = document.getElementById('score');
 const highestScoreDisplay = document.getElementById('highest-score');
 
-let score = 0;
 let highestScore = localStorage.getItem('highestScore') || 0;
 let removalDuration = 2000;
-
+let score = 0;
 
 highestScoreDisplay.textContent = highestScore;
+
+
+function startGame() {
+  let score = 0;
+  scoreDisplay.textContent = score;
+  let interval = setInterval(createMole, 2000);
+
+  function stopGame() {
+    clearInterval(interval)
+    let score = 0;
+    scoreDisplay.textContent = score;
+  }
+
+  end.addEventListener('click', function() {
+
+    stopGame();
+    start.style.visibility = 'visible';
+    end.style.visibility = 'collapse';
+  
+  })
+}
 
 
 function createMole() {
@@ -57,12 +77,23 @@ function whackMole() {
     removalDuration -= 200;
   }
 
+  if (score === 0) {
+    removalDuration = 2000;
+  }
+
 }
 
 
-function startGame() {
-  setInterval(createMole, 2000);
-}
+const start = document.querySelector('.start')
+const end = document.querySelector('.end')
+
+end.style.visibility = 'collapse'
 
 
-startGame();
+start.addEventListener('click', function() {
+
+  startGame();
+  start.style.visibility = 'collapse';
+  end.style.visibility = 'visible';
+
+})
