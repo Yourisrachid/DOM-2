@@ -24,6 +24,50 @@ highestScoreDisplay.textContent = highestScore;
 function startGame() {
   let score = 0;
   scoreDisplay.textContent = score;
+
+  function createMole() {
+    const mole = document.createElement('div');
+    mole.classList.add('mole');
+    mole.addEventListener('click', whackMole);
+    zone.appendChild(mole);
+  
+  
+    const randomX = Math.floor(Math.random() * 5);
+    const randomY = Math.floor(Math.random() * 5);
+    mole.style.gridColumn = randomX + 1;
+    mole.style.gridRow = randomY + 1;
+  
+  
+    setTimeout(() => {
+      mole.remove();
+    }, removalDuration);
+  }
+  
+  
+  function whackMole() {
+    this.remove();
+    score++;
+    scoreDisplay.textContent = score;
+  
+  
+    if (score > highestScore) {
+      highestScore = score;
+      highestScoreDisplay.textContent = highestScore;
+      localStorage.setItem('highestScore', highestScore);
+    }
+  
+    if (score % 5 === 0) {
+      removalDuration -= 200;
+    }
+  
+    if (score === 0) {
+      removalDuration = 2000;
+    }
+  
+  }
+
+
+
   let interval = setInterval(createMole, 2000);
 
   function stopGame() {
@@ -42,46 +86,7 @@ function startGame() {
 }
 
 
-function createMole() {
-  const mole = document.createElement('div');
-  mole.classList.add('mole');
-  mole.addEventListener('click', whackMole);
-  zone.appendChild(mole);
 
-
-  const randomX = Math.floor(Math.random() * 5);
-  const randomY = Math.floor(Math.random() * 5);
-  mole.style.gridColumn = randomX + 1;
-  mole.style.gridRow = randomY + 1;
-
-
-  setTimeout(() => {
-    mole.remove();
-  }, removalDuration);
-}
-
-
-function whackMole() {
-  this.remove();
-  score++;
-  scoreDisplay.textContent = score;
-
-
-  if (score > highestScore) {
-    highestScore = score;
-    highestScoreDisplay.textContent = highestScore;
-    localStorage.setItem('highestScore', highestScore);
-  }
-
-  if (score % 5 === 0) {
-    removalDuration -= 200;
-  }
-
-  if (score === 0) {
-    removalDuration = 2000;
-  }
-
-}
 
 
 const start = document.querySelector('.start')
