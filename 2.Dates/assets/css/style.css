@@ -1,0 +1,38 @@
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.date {
+  margin-top: 4%;
+  align-items: center;
+  border: 2px solid white;
+  border-radius: 15%;
+  padding-left: 3%;
+  padding-right: 3%;
+  text-align: center;
+  font-size: 80px;
+}
+.date .dateBlock {
+  line-height: 0.8%;
+}
+.date .year {
+  background-color: black;
+}
+
+.hour {
+  text-align: center;
+  font-size: 150Px;
+}
+.hour p::after {
+  content: attr(data-after);
+  font-size: 100px;
+}/*# sourceMappingURL=style.css.map */
